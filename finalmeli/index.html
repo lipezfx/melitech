@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeliTech - Meliponário Escolar</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/glassmorphism.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="Imagens/SOABELHA.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Background -->
+    <div class="background">
+        <div class="background-image"></div>
+        <div class="background-overlay"></div>
+    </div>
+
+    <!-- Hidden checkboxes for section navigation -->
+    <input type="radio" name="navigation" id="nav-home" checked>
+    <input type="radio" name="navigation" id="nav-dashboard">
+    <input type="radio" name="navigation" id="nav-map">
+    <input type="radio" name="navigation" id="nav-species">
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <div class="nav-content">
+                <!-- Logo -->
+                <div class="nav-logo">
+                    <div class="logo-icon">
+                        <img style="width: auto; height: 100%; max-height: 90px; margin-right: 12px;" src="Imagens/icon.png" alt="Logo">
+                    </div>
+                    <span class="logo-text">Meliponário - ETEC Professor Edson Galvão</span>
+                </div>
+
+                <!-- Botão hamburguer (só aparece no mobile) -->
+                <button class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Navigation Items -->
+                <div class="nav-items" id="nav">
+                    <label for="nav-home" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Início</span>
+                    </label>
+                    <label for="nav-dashboard" class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Painel</span>
+                    </label>
+                    <label for="nav-map" class="nav-item">
+                        <i class="fa-solid fa-earth-americas"></i>
+                        <span>Mapa</span>
+                    </label>
+                    <label for="nav-species" class="nav-item">
+                        <i class="fa-solid fa-dna"></i>
+                        <span>Espécies</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page">
+            <div class="container">
+                <div class="hero-section">
+                    <h1 class="hero-title">MeliTech</h1>
+                    <p class="hero-description">Gestão e Monitoramento Inteligente do Meliponário Escolar</p>
+                </div>
+
+                <!-- Main Content Card -->
+                <div class="content-card">
+                    <div class="content-grid">
+                        <div class="content-text">
+                            <h2>Sobre o Projeto:</h2>
+                            <p>
+                                A meliponicultura tem se destacado como uma prática sustentável, educativa e relevante para a conservação da biodiversidade. Pensando nisso, o presente projeto visa unir a área técnica do Agronegócio com a inovação tecnológica da Informática, por meio da criação de um sistema web capaz de gerenciar, monitorar e divulgar dados do meliponário escolar. O projeto será composto por dois módulos principais: o MeliGestor, focado na gestão pedagógica e técnica do meliponário, e o MeliSensores, que permitirá o monitoramento remoto dos parâmetros ambientais das colmeias.
+                            </p>
+                            <p>
+                                A união entre práticas agropecuárias e ferramentas tecnológicas representa um avanço significativo no contexto educacional e científico. O projeto permitirá o acompanhamento em tempo real das colmeias, promovendo ações preventivas na sanidade das abelhas e enriquecendo o processo pedagógico com dados reais e atualizados. Além disso, a criação de uma plataforma online possibilitará o acesso remoto a informações, incentivando a pesquisa e a troca de experiências entre diferentes instituições educacionais.
+                            </p>
+                            <label for="nav-dashboard" class="cta-button">
+                                <span>Explore o Painel</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </label>
+                        </div>
+                        <div class="content-image">
+                            <div class="image-container">
+                                <img src="Imagens/fotoescola.jpeg" alt="">
+                            </div>
+                            <div class="floating-element floating-1"></div>
+                            <div class="floating-element floating-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Monitoranento em Tempo Real</h3>
+                        <p>Dados Imediatos para a Saúde e Crescimento do Enxame.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Proteção de Abelhas Nativas</h3>
+                        <p>Inovação e Ciência para a Defesa da Polinização Local.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Futuro Sustentável</h3>
+                        <p>Contribuindo para a Segurança Alimentar e a Biodiversidade Global.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section id="dashboard" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Painel - Abelha Jataí</h1>
+                    <p>Monitoramento em tempo real. </p>
+                </div>
+
+                <!-- Status Overview -->
+                <div class="status-card">
+                    <div class="status-header">
+                        <h2>Sensores Internos</h2>
+                    </div>
+                    <p>Dados de Temperatura, Umidade e Vibração para a Saúde e Crescimento da Colmeia.</p>
+                </div>
+
+                <!-- Data Cards -->
+                <div class="dashboard-grid">
+                    <div class="data-card temperature-card">
+                        <div class="card-background"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-thermometer-half"></i>
+                                </div>
+                            </div>
+                            <h3>Temperatura</h3>
+                            <div class="card-value">
+                                <span class="value">28.5</span>
+                                <span class="unit">°C</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill temperature-progress"></div>
+                            </div>
+                        </div>           
+                    </div>
+
+                    <div class="data-card humidity-card">
+                        <div class="card-background"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                            </div>
+                            <h3>Umidade</h3>
+                            <div class="card-value">
+                                <span class="value">65.2</span>
+                                <span class="unit">%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill humidity-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-card vibration-card">
+                        <div class="card-background"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-wave-square"></i>
+                                </div>
+                            </div>
+                            <h3>Vibração</h3>
+                            <div class="card-value">
+                                <span class="value">2.3</span>
+                                <span class="unit">Hz</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill vibration-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-card">
+                    <div class="status-header">
+                        <h2>Sensores Externos</h2>
+                    </div>
+                    <p>Coleta de Dados Ambientais Cruciais para Avaliar as Condições de Forrageio e Segurança.</p>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="data-card temperature-card">
+                        <div class="card-background"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-thermometer-half"></i>
+                                </div>
+                            </div>
+                            <h3>Temperatura</h3>
+                            <div class="card-value">
+                                <span class="value">28.5</span>
+                                <span class="unit">°C</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill temperature-progress"></div>
+                            </div>
+                        </div>           
+                    </div>
+
+                    <div class="data-card humidity-card">
+                        <div class="card-background"></div>
+                        <div class="card-content">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                            </div>
+                            <h3>Umidade</h3>
+                            <div class="card-value">
+                                <span class="value">65.2</span>
+                                <span class="unit">%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill humidity-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+
+        <!-- Map Page -->
+        <section id="map" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Mapa dos Meliponários</h1>
+                    <p>Explore no mapa a localização de criadores de abelhas parceiros da Etec, desde meliponários até caixas de abelhas de criadores amadores.<br>Clique nos pontos para mais informações.</p>
+                </div>
+                
+                <div id="map-leaflet" style="height: 500px; border-radius: 15px;"></div>
+            </div>
+        </section>
+
+        <!-- Species Page -->
+        <section id="species" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1>Espécies</h1>
+                    <p>O meliponário da Etec Edson Galvão preserva espécies de abelhas nativas, em caixas de manejo e em ninhos naturais mapeados no campus.</p>
+                </div>
+
+                <div class="species-grid">
+                    <!-- Jataí -->
+                    <a style="text-decoration: dashed;" href="especies/jatai.html" target="_blank">
+                        <div class="species-card">
+                            <div class="species-image">
+                                <img src="https://www.multiflon.com.br/images/FCK/images/Jata%C3%AD.jpg" alt="Jataí">
+                            </div>
+                            <div class="species-content">
+                                <div class="species-header">
+                                    <div class="species-info">
+                                        <h3>Jataí</h3>
+                                        <p class="scientific-name">Tetragonisca angustula</p>
+                                    </div>
+                                </div>
+                                <p class="species-description">Pequena e dócil, espalhada por todo o Brasil, é muito valorizada na meliponicultura pelo mel suave e medicinal.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Mandaçaia -->
+                    <a style="text-decoration: dashed;" href="especies/mandacaia.html" target="_blank">
+                        <div class="species-card">
+                            <div class="species-image">
+                                <img src="https://blog.mfrural.com.br/wp-content/uploads/2022/01/mandacaia.jpg" alt="Mandaçaia">
+                            </div>
+                            <div class="species-content">
+                                <div class="species-header">
+                                    <div class="species-info">
+                                        <h3>Mandaçaia</h3>
+                                        <p class="scientific-name">Melipona quadrifasciata</p>
+                                    </div>
+                                </div>
+                                <p class="species-description">Com suas listras douradas inconfundíveis, é uma das abelhas nativas mais criadas, produtivas e apreciadas pelo mel encorpado.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Mirim-Guaçu -->
+                    <a style="text-decoration: dashed;" href="especies/mirimguacu.html" target="_blank">
+                        <div class="species-card">
+                            <div class="species-image">
+                                <img src="https://i.pinimg.com/736x/e6/6d/bf/e66dbff4189e25d7e111ad551286c47c.jpg" alt="Mirim-Guaçu">
+                            </div>
+                            <div class="species-content">
+                                <div class="species-header">
+                                    <div class="species-info">
+                                        <h3>Mirim-Guaçu</h3>
+                                        <p class="scientific-name">Plebeia Remota</p>
+                                    </div>
+                                </div>
+                                <p class="species-description">Delicada e resistente, forma colônias numerosas que se adaptam bem a diferentes ambientes.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Mirim-Preguiça -->
+                    <a style="text-decoration: dashed;" href="especies/mirimpreguica.html" target="_blank">
+                        <div class="species-card">
+                            <div class="species-image">
+                                <img src="Imagens/mirimpreguica.jpeg" alt="Mirim-Preguiça">
+                            </div>
+                            <div class="species-content">
+                                <div class="species-header">
+                                    <div class="species-info">
+                                        <h3>Mirim-Preguiça</h3>
+                                        <p class="scientific-name">Friesella schrottkyi</p>
+                                    </div>
+                                </div>
+                                <p class="species-description">Minúscula e tímida, é uma das menores abelhas sem ferrão do Brasil, mas essencial para a polinização.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Borá -->
+                    <a style="text-decoration: dashed;" href="especies/bora.html" target="_blank">
+                        <div class="species-card">
+                            <div class="species-image">
+                                <img src="https://inaturalist-open-data.s3.amazonaws.com/photos/437974926/large.jpeg" alt="Borá">
+                            </div>
+                            <div class="species-content">
+                                <div class="species-header">
+                                    <div class="species-info">
+                                        <h3>Borá</h3>
+                                        <p class="scientific-name">Tetragona clavipes</p>
+                                    </div>
+                                </div>
+                                <p class="species-description">Ágil e vigorosa, produz um mel raro e de sabor marcante, encontrado em várias regiões brasileiras.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Iraí -->
+                    <a style="text-decoration: dashed;" href="especies/irai.html" target="_blank">
+                        <div class="species-card">
+                            <div class="species-image">
+                                <img src="Imagens/irai.jpg" alt="Iraí">
+                            </div>
+                            <div class="species-content">
+                                <div class="species-header">
+                                    <div class="species-info">
+                                        <h3>Iraí</h3>
+                                        <p class="scientific-name">Nannotrigona testaceicornis</p>
+                                    </div>
+                                </div>
+                                <p class="species-description">Adaptável e produtiva, está presente em áreas urbanas e rurais, sendo grande aliada da biodiversidade.</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Bugia -->
+                    <a style="text-decoration: dashed;" href="especies/bugia.html" target="_blank">
+                        <div class="species-card">
+                            <div class="species-image">
+                                <img src="Imagens/bugia.jpg" alt="Bugia">
+                            </div>
+                            <div class="species-content">
+                                <div class="species-header">
+                                    <div class="species-info">
+                                        <h3>Bugia</h3>
+                                        <p class="scientific-name">Melipona rufiventris</p>
+                                    </div>
+                                </div>
+                                <p class="species-description">Robusta e imponente, guarda um mel de sabor intenso, tradicionalmente apreciado em diversas culturas.</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+    <footer class="footer">
+        <!-- Main Footer -->
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-grid">
+                    
+                    <!-- Brand Section -->
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <div class="footer-logo-icon">
+                                <img style="width: auto; height: 100%; max-height: 90px; margin-right: 12px; border-radius: 18px;" src="Imagens/Logo.jpg" alt="Logo">
+                            </div>
+                            <div class="footer-logo-text">
+                                <h3>Meliponário</h3>
+                                <p>ETEC Edson Galvão</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Links -->
+                        <div class="footer-social">
+                            <a href="https://www.instagram.com/etec.edsongalvao?igsh=MTJyZzY3NDM0bTN0Ng%3D%3D&utm_source=qr" class="social-link" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="footer-navigation">
+                        <h4 class="footer-section-title">Navegação</h4>
+                        <ul class="footer-nav-list">
+                            <li><label for="nav-home" class="footer-nav-link">Início</label></li>
+                            <li><label for="nav-dashboard" class="footer-nav-link">Painel</label></li>
+                            <li><label for="nav-map" class="footer-nav-link">Mapa</label></li>
+                            <li><label for="nav-species" class="footer-nav-link">Espécies</label></li>
+                        </ul>
+                    </div>
+
+                    
+
+                    <!-- Contact Info -->
+                    <div class="footer-contact">
+                        <h4 class="footer-section-title">Contato</h4>
+                        <div class="contact-list">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt contact-icon"></i>
+                                <span>Itapetininga-SP, Brasil</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope contact-icon"></i>
+                                <span>diogo.machado19@etec.sp.gov.br</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone contact-icon"></i>
+                                <span>(15) 99769-1386</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">
+                        <span style="text-align: center;" >© 2025 Meliponário Escola Técnica Estadual Professor Edson Galvão.</span>
+                        <div class="footer-legal">
+                        <a style="text-decoration: underline;" href="colaboradores.html" class="legal-link" target="_blank">Colaboradores</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </main>
+    
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/species.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script> 
+    
+    <script>
+        // ⚠️ CONFIGURAÇÃO CORRETA DAS PORTAS ⚠️
+        // Porta 1883 = MQTT Mosquitto (apenas Node-RED acessa)
+        // Porta 1880 = Node-RED HTTP (navegador acessa aqui)
+        const NODE_RED_PORT = 1880;
+        const temperaturaUrl = `http://localhost:${NODE_RED_PORT}/dados/temperatura`;
+        const umidadeUrl = `http://localhost:${NODE_RED_PORT}/dados/umidade`;
+
+        const tempElement = document.getElementById('temperature');
+        const humidElement = document.getElementById('humidity');
+        const lastUpdateElement = document.getElementById('lastUpdate');
+
+        // Função de atualização de dados com diagnóstico completo
+        async function fetchData(url, targetElement, key, unit, fallbackValue = 'N/A') {
+            try {
+                const response = await fetch(url);
+                console.log(`✅ STATUS da requisição para ${url}:`, response.status);
+
+                if (!response.ok) {
+                    console.error(`❌ ERRO HTTP: Status ${response.status}. Verifique se o Node-RED está rodando na porta ${NODE_RED_PORT}.`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log(`📦 JSON Recebido para ${key}:`, data);
+                
+                if (data === null || data[key] === undefined) {
+                    console.error(`❌ ERRO DE CHAVE: A chave '${key}' não foi encontrada no JSON.`);
+                    throw new Error(`Chave '${key}' não encontrada no JSON.`);
+                }
+                
+                const value = parseFloat(data[key]).toFixed(1);
+                
+                if (targetElement) {
+                    targetElement.textContent = value;
+                    console.log(`✅ SUCESSO: ${key} = ${value}${unit} atualizado na tela!`);
+                }
+                
+                if (lastUpdateElement) {
+                    lastUpdateElement.textContent = new Date().toLocaleTimeString('pt-BR');
+                }
+
+                return parseFloat(value);
+            } catch (error) {
+                console.error(`❌ [FALHA] Não foi possível atualizar ${key}.`, error.message);
+                
+                if (targetElement) {
+                    targetElement.textContent = fallbackValue;
+                }
+                return null;
+            }
+        }
+        
+        function updateTemperatureData() {
+            fetchData(temperaturaUrl, tempElement, 'temperatura', '°C', '--').then(value => {
+                if (value !== null) {
+                    updateProgressBar(value, 20, 40, 'temperature-progress');
+                }
+            });
+        }
+        
+        function updateHumidityData() {
+            fetchData(umidadeUrl, humidElement, 'umidade', '%', '--').then(value => {
+                if (value !== null) {
+                    updateProgressBar(value, 40, 90, 'humidity-progress');
+                }
+            });
+        }
+        
+        function updateProgressBar(value, min, max, className) {
+            const progressFill = document.querySelector(`.${className}`);
+            if (!progressFill) return;
+            
+            const visRange = className.includes('temperature') ? (40 - 10) : (90 - 40);
+            const visMin = className.includes('temperature') ? 10 : 40;
+            let percentage = ((value - visMin) / visRange) * 100;
+            
+            percentage = Math.min(100, Math.max(0, percentage)); 
+            progressFill.style.width = `${percentage}%`;
+            
+            progressFill.classList.remove('status-ok', 'status-warning');
+            const optimalMin = (className.includes('temperature')) ? 26 : 60;
+            const optimalMax = (className.includes('temperature')) ? 30 : 70;
+
+            if (value >= optimalMin && value <= optimalMax) {
+                progressFill.classList.add('status-ok');
+            } else {
+                progressFill.classList.add('status-warning');
+            }
+        }
+        
+        // Inicialização
+        console.log('🚀 Iniciando sistema de monitoramento...');
+        console.log(`📡 Node-RED HTTP na porta: ${NODE_RED_PORT}`);
+        console.log(`🔗 Endpoints: ${temperaturaUrl} e ${umidadeUrl}`);
+        
+        updateTemperatureData();
+        updateHumidityData();
+        
+        setInterval(updateTemperatureData, 5000);
+        setInterval(updateHumidityData, 5000);
+    </script>
+<script>
+    const hamburger = document.getElementById("hamburger");
+    const nav = document.getElementById("nav");
+
+    // Abre e fecha ao clicar no botão
+    hamburger.addEventListener("click", () => {
+        nav.classList.toggle("show");
+    });
+
+    // Fecha quando clicar em qualquer link do menu
+    const navItems = nav.querySelectorAll("label, a");
+    navItems.forEach(item => {
+        item.addEventListener("click", () => {
+            nav.classList.remove("show");
+        });
+    });
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <script>
+        var map = L.map('map-leaflet').setView([-23.59, -47.91], 11); 
+
+const mapRadio = document.getElementById('nav-map');
+
+mapRadio.addEventListener('change', function() {
+    if (this.checked) {
+        setTimeout(() => {
+            map.invalidateSize(); 
+        }, 1);
+    }
+});
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var goldIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+            shadowUrl: 'https://unpkg.com/leaflet/dist/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [0, -40],
+            shadowSize: [41, 41]
+        });
+
+        // 🐝 Locais do Projeto MeliTech
+L.marker([-23.470473131733197, -48.038157650156535], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b> ETEC Prof. Edson Galvão</🏫b><br>Contato: Prof. Diogo<br>📞 (15) 99773-0084<br><a href="https://www.cps.sp.gov.br/etecs/etec-prof-edson-galvao/" target="_blank">Visitar site</a>');
+
+L.marker([-23.59958285362712, -48.05109131946176], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🏫 Escola Darcy Vieira</b><br>Contato: Prof. Diogo<br>📞 (15) 99773-0084');
+
+L.marker([-23.600810130037758, -48.051382919461595], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🎓 FATEC de Itapetininga</b><br>Contato: Profª Flavia Cavalini<br>📞 (15) 98188-1230<br><a href="https://www.cps.sp.gov.br/fatecs/fatec-itapetininga-prof-antonio-belizandro-barbosa-rezende/" target="_blank">Visitar site</a>');
+
+L.marker([-23.624649067211756, -47.82380563277935], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🏫 Escola Maria Imaculada</b><br>Contato: Profª Aline<br>📞 (15) 98132-3305');
+
+L.marker([-23.625935521922063, -47.82123581503834], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🐝 Criador Amador - Gilmar</b><br>Contato: Gilmar<br>📞 (15) 99849-0882');
+
+L.marker([-23.635689215902293, -47.782037661787754], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🐝 Criador Amador - Carlão</b><br>Contato: Carlão<br>📞 (15) 99806-0410');
+
+L.marker([-23.721454653965388, -47.75593048585456], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🐝 Criador Amador - Otávio</b><br>Contato: Otávio<br>📞 (15) 99620-3454');
+
+L.marker([-23.626372340805183, -47.82980237527914], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🌳 Casa do Meio Ambiente</b><br>Contato: Gilmar<br>📞 (15) 99849-0882');
+
+L.marker([-23.563961192275976, -48.03906079062644], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🐝 Criador Amador - Diogo</b><br>Contato: Diogo<br>📞 (15) 99773-0084');
+
+L.marker([-23.583940726675927, -48.03869221760781], { icon: goldIcon }).addTo(map)
+  .bindPopup('<b>🏫 Escola Profª Maria Francisca</b><br>Contato: Profª Maila<br>📞 (15) 99707-9984');
+
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const navItems = document.querySelectorAll('.nav-item, .footer-nav-link');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+        
+                const nav = document.querySelector('.nav-items');
+                if (nav && nav.classList.contains('show')) {
+                    nav.classList.remove('show');
+                }
+            });
+        });
+        });
+    </script>
+    
+</body>
+</html>
+            

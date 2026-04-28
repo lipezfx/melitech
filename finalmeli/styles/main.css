@@ -1,0 +1,981 @@
+/* Main CSS file for the Meliponário website */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Hide radio buttons and checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+    display: none;
+}
+
+:root {
+    --primary-color: #f59e0b;
+    --secondary-color: #ea580c;
+    --accent-color: #fbbf24;
+    --text-light: #f3f4f6;
+    --text-dark: #1f2937;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --transition: all 0.3s ease;
+    --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #111827;
+    color: var(--text-light);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1650598308282-9629a232e77f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWVoaXZlJTIwaGV4YWdvbiUyMG1vZGVybiUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzU5MzE4NzMyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 24, 39, 0.7);
+    backdrop-filter: blur(2px);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Navigation */
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 1.5rem;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-content {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-items {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Active navigation states using radio buttons */
+#nav-home:checked ~ nav .nav-item:nth-child(1),
+#nav-dashboard:checked ~ nav .nav-item:nth-child(2),
+#nav-map:checked ~ nav .nav-item:nth-child(3),
+#nav-species:checked ~ nav .nav-item:nth-child(4) {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.2));
+    color: var(--accent-color);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+}
+
+#nav-home:checked ~ nav .nav-item:nth-child(1)::before,
+#nav-dashboard:checked ~ nav .nav-item:nth-child(2)::before,
+#nav-map:checked ~ nav .nav-item:nth-child(3)::before,
+#nav-species:checked ~ nav .nav-item:nth-child(4)::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(234, 88, 12, 0.1));
+    border-radius: 0.75rem;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Page Transition */
+.page-transition {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(20px);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.page-transition.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Main Content */
+.main-content {
+    position: relative;
+    z-index: 10;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 8rem;
+    padding-bottom: 3rem;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Show pages based on radio button state */
+#nav-home:checked ~ main #home,
+#nav-dashboard:checked ~ main #dashboard,
+#nav-map:checked ~ main #map,
+#nav-species:checked ~ main #species {
+    display: block;
+    opacity: 1;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.page-header h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+.page-header p {
+    font-size: 1.25rem;
+    color: #d1d5db;
+    max-width: 48rem;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Home Page Styles */
+.hero-section {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 10vw, 5rem);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: #d1d5db;
+    max-width: 48rem;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.content-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    border-radius: 1.5rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    padding: 3rem;
+    margin-bottom: 3rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.content-text h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.content-text p {
+    font-size: 1.125rem;
+    color: #d1d5db;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
+    text-decoration: none;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(245, 158, 11, 0.4);
+}
+
+.cta-button i {
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover i {
+    transform: translateX(4px);
+}
+
+.content-image {
+    position: relative;
+}
+
+.image-container {
+    aspect-ratio: 1;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.2));
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.floating-element {
+    position: absolute;
+    border-radius: 50%;
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--glass-border);
+}
+
+.floating-1 {
+    width: 6rem;
+    height: 6rem;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(234, 88, 12, 0.3));
+    top: -1rem;
+    right: -1rem;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-2 {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, rgba(234, 88, 12, 0.4), rgba(245, 158, 11, 0.4));
+    bottom: -1.5rem;
+    left: -1.5rem;
+    animation: float 6s ease-in-out infinite 2s;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    transition: var(--transition);
+}
+
+.feature-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.feature-icon {
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.2));
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: white;
+}
+
+.feature-card p {
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .nav-item {
+        justify-content: center;
+        padding: 0.75rem;
+    }
+
+    .nav-item span {
+        display: none;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .content-card {
+        padding: 2rem;
+    }
+
+    .page {
+        padding-top: 10rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .navigation {
+        padding: 1rem;
+    }
+
+    .content-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Leaflet Map Styles */
+#map-leaflet {
+    width: 100%;
+    height: 500px; /* altura padrão */
+    border-radius: 1rem;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    margin: 2rem 0;
+    z-index: 1; /* garante que o mapa fique clicável */
+}
+
+.leaflet-container {
+    background: #111827; /* fundo escuro caso os tiles não carreguem */
+    border-radius: inherit;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    #leaflet-map {
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    #leaflet-map {
+        height: 250px;
+    }
+}
+
+/* =======================================
+   Otimização do Menu Hambúrguer (Mobile)
+   ======================================= */
+
+/* O botão hambúrguer deve ficar escondido no desktop */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: var(--primary-color); /* Cor de destaque */
+    cursor: pointer;
+    z-index: 1001; /* Garante que fique acima de tudo */
+}
+
+/* 768px é a quebra onde o menu vira hambúrguer */
+@media (max-width: 768px) {
+    /* Mostra o botão hambúrguer */
+    .hamburger {
+        display: block;
+    }
+    
+    /* Esconde os links de navegação no nav-content original */
+    .nav-content {
+        /* Desativa o layout de grade/flex que organiza os itens no desktop */
+        flex-direction: row; /* Volta a ser linha para o logo e o botão ficarem lado a lado */
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* O Menu Flutuante - OTIMIZADO PARA ALTO CONTRASTE */
+    .nav-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        /* Posicionamento flutuante */
+        position: absolute;
+        top: 85px; /* Abaixo do cabeçalho */
+        right: 20px;
+        padding: 15px;
+        width: min(90vw, 250px); /* Largura máxima, mas adaptável */
+        border-radius: 12px;
+        z-index: 1000;
+
+        /* === ALTERAÇÕES PARA MELHORAR A VISUALIZAÇÃO === */
+        /* Usamos o fundo escuro (body) com 90% de opacidade para melhor contraste. */
+        background: rgba(17, 24, 39, 0.9);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--shadow);
+
+        /* Animação: Começa fechado e invisível */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
+    }
+    
+    /* Estado Aberto (Quando a classe 'show' é adicionada via JavaScript) */
+    .nav-items.show {
+        max-height: 500px; /* Um valor grande o suficiente para mostrar todos os links */
+        opacity: 1;
+    }
+
+    /* Ajuste para os itens do menu mobile */
+    .nav-item {
+        /* Garante que os itens de navegação ocupem a largura total do menu flutuante */
+        width: 100%;
+        justify-content: flex-start;
+        padding: 0.75rem;
+    }
+    
+    /* Mostra o texto do link no menu hambúrguer */
+    .nav-item span {
+        display: inline;
+    }
+    
+    /* Remove a configuração de grid anterior para evitar conflito */
+    .nav-items {
+        grid-template-columns: none;
+    }
+}
+
+
+/* Footer Styles for Meliponário */
+
+.footer {
+    position: relative;
+    margin-top: 5rem;
+}
+
+.footer-main {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    padding: 4rem 0;
+}
+
+/* Brand Section */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.footer-logo-text h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.footer-logo-text p {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.footer-description {
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Navigation Section */
+.footer-section-title {
+    color: white;
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav-list li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-nav-link {
+    color: #9ca3af;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-nav-link:hover {
+    color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+/* Stats Section */
+.stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.stat-icon {
+    width: 2rem;
+    height: 2rem;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.2));
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.stat-value {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+}
+
+.stat-label {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    margin: 0;
+}
+
+/* Contact Section */
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #9ca3af;
+}
+
+.contact-icon {
+    color: var(--primary-color);
+    width: 1.25rem;
+}
+
+.newsletter {
+    margin-top: 2rem;
+}
+
+.newsletter-title {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.newsletter-form {
+    display: flex;
+}
+
+.newsletter-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: 0.875rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.newsletter-input::placeholder {
+    color: #9ca3af;
+}
+
+.newsletter-input:focus {
+    border-color: var(--primary-color);
+}
+
+.newsletter-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 0.75rem 1rem;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.newsletter-button:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-copyright {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9ca3af;
+}
+
+.heart-icon {
+    color: #ef4444;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.legal-link {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: var(--transition);
+}
+
+.legal-link:hover {
+    color: var(--primary-color);
+}
+
+/* Tech Badge */
+.footer-tech-badge {
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+/* Decorative Elements */
+.footer-decoration {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+.footer-decoration-1 {
+    width: 8rem;
+    height: 8rem;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(234, 88, 12, 0.05));
+    top: 0;
+    left: 25%;
+}
+
+.footer-decoration-2 {
+    width: 6rem;
+    height: 6rem;
+    background: linear-gradient(135deg, rgba(234, 88, 12, 0.05), rgba(245, 158, 11, 0.05));
+    bottom: 0;
+    right: 25%;
+}
+
+/* Animations */
+@keyframes heartbeat {
+    0%, 50%, 100% {
+        transform: scale(1);
+    }
+    25%, 75% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 3rem 0;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        order: -1;
+    }
+    
+    .tech-status {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .newsletter-input {
+        border-radius: 0.5rem;
+    }
+    
+    .newsletter-button {
+        border-radius: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid {
+        gap: 1.5rem;
+        padding: 2rem 0;
+    }
+    
+    .stats-list {
+        gap: 0.75rem;
+    }
+    
+    .contact-list {
+        gap: 0.75rem;
+    }
+    
+    .footer-social {
+        justify-content: center;
+    }
+}
+
+/* Estilo Personalizado da Barra de Rolagem (WebKit) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+/* Fundo (Trilha) */
+::-webkit-scrollbar-track {
+    background: #2D3748; 
+    border-radius: 10px;
+}
+
+/* Polegar (Thumb) - a parte que rola */
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color); 
+    border-radius: 10px;
+    border: 3px solid #2D3748; 
+}
+
+/* Polegar (Thumb) ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+
+/* Estilo para Firefox */
+* {
+    scrollbar-color: var(--primary-color) #2D3748; 
+    scrollbar-width: thin;
+}   

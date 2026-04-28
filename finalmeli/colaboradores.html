@@ -1,0 +1,123 @@
+<!-- File: index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeliTech - Meliponário Escolar</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/glassmorphism.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="Imagens/SOABELHA.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="background">
+        <div class="background-image"></div>
+        <div class="background-overlay"></div>
+    </div>
+
+    <input type="radio" name="navigation" id="nav-home" checked hidden>
+
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="home" class="page">
+            <div class="container">
+                <div class="hero-section">
+                    <h1 class="hero-title">Colaboradores</h1>
+                    <p class="hero-description">Gestão e Monitoramento Inteligente do Meliponário Escolar</p>
+                </div><br>
+
+                <!-- Team cards -->
+                <div class="team-grid">
+                    <article class="card glass">
+                        <h3>Davi Yudi</h3>
+                        <p class="role">Back-End & LoRa</p>
+                        <p>Banco de dados, API e gerenciamento da comunicação LoRa.</p>
+                    </article>
+
+                    <article class="card glass">
+                        <h3>Felipe Augusto</h3>
+                        <p class="role">Front-End</p>
+                        <p>Responsável pela interface e pelo site do MeliTech.</p>
+                    </article>
+
+                    <article class="card glass">
+                        <h3>João Vitor</h3>
+                        <p class="role">Back-End & LoRa</p>
+                        <p>Desenvolvimento do firmware, integração com LoRa e servidor.</p>
+                    </article>
+
+                    <article class="card glass">
+                        <h3>Gabriel</h3>
+                        <p class="role">Pesquisas & Espaço Físico</p>
+                        <p>Pesquisas técnicas e organização do espaço e energia elétrica.</p>
+                    </article>
+
+                    <article class="card glass">
+                        <h3>Professor Willian</h3>
+                        <p class="role">Back-End & Orientador</p>
+                        <p>Suporte técnico ao back-end e orientação do projeto.</p>
+                    </article>
+
+                    <article class="card glass">
+                        <h3>Professor Tibério</h3>
+                        <p class="role">Back-End & Orientador</p>
+                        <p>Contribuições técnicas e validação do sistema.</p>
+                    </article>
+
+                    <article class="card glass">
+                        <h3>Professor Diogo</h3>
+                        <p class="role">Pesquisas & Infraestrutura</p>
+                        <p>Coordenação das pesquisas e infraestrutura física (energia).</p>
+                    </article>
+                </div><br>
+                <a 
+                    href="index.html" 
+                    class="cta-button"
+                    style="
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                        margin-top: 30px;
+                        width: fit-content;
+                    "
+                >
+                    <span>Voltar para a Tela Inicial</span>
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+        </section>
+    </main>
+
+</body>
+</html>
+<style>
+    :root {
+        --bg-1: #0f172a;
+        --bg-2: #071021;
+        --accent: #f59e0b;
+        --glass-bg: rgba(255,255,255,0.06);
+    }
+    
+    * { box-sizing: border-box; }
+    html,body{ height:100%; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:#e6eef8; }
+    
+    
+    .main-content{ padding:40px 20px; }
+    .container{ max-width:1100px; margin:0 auto; }
+    
+    .hero-section{ text-align:center; margin-bottom:28px; }
+    .hero-title{ font-size:2.2rem; margin-bottom:6px; }
+    .hero-description{ color: #cfe4ff; opacity:0.9; }
+    
+    .team-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:18px; margin-top:24px; }
+    .card{ padding:18px; border-radius:14px; box-shadow: 0 6px 18px rgba(2,6,23,0.6); }
+    .card h3{ margin-bottom:8px; }
+    .role{ font-weight:700; color:var(--accent); margin-bottom:8px; }
+    
+    .glass{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border: 1px solid rgba(255,255,255,0.06); backdrop-filter: blur(6px); }
+    
+    .card{ transition: transform 200ms ease, box-shadow 200ms ease; }
+    .card:hover{ transform: translateY(-6px); box-shadow: 0 14px 30px rgba(2,6,23,0.55); }
+</style>

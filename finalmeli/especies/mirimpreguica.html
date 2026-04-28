@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirim-Preguiça - Especificações</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/glassmorphism.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="../Imagens/SOABELHA.png" type="image/x-icon">
+</head>
+<body>
+    <div class="background">
+        <div class="background-image"></div>
+        <div class="background-overlay"></div>
+    </div>
+
+    <input type="radio" name="navigation" id="nav-home">
+    <input type="radio" name="navigation" id="nav-dashboard">
+    <input type="radio" name="navigation" id="nav-map">
+    <input type="radio" name="navigation" id="nav-species" checked>
+    
+    <nav class="navigation">
+        <div class="nav-container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <div class="logo-icon">
+                        <img style="width: 120%; height: 120%;" src="../Imagens/icon.png" alt="Logo">
+                    </div>
+                    <span class="logo-text">Meliponário - ETEC Professor Edson Galvão</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section id="species" class="page">
+            <div class="container">
+                <div class="hero-section">
+                    <h1 class="hero-title">Jataí</h1>
+                    <p class="hero-description">Especificações</p>
+                </div>
+
+                <div class="content-card">
+                    <img 
+                        class="infoabelhas" 
+                        src="../Imagens/abelhas/mirimpreguica/1.jpg" 
+                        alt="Jataí 1"
+                        style="
+                            display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            max-width: 100%;
+                            margin-bottom: 20px;
+                        "
+                    >
+
+                    <img 
+                        class="infoabelhas" 
+                        src="../Imagens/abelhas/mirimpreguica/2.jpg" 
+                        alt="Jataí 2"
+                        style="
+                            display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            max-width: 100%;
+                        "
+                    >
+                </div> <a 
+                    href="../index.html" 
+                    class="cta-button"
+                    style="
+                        display: block; /* Garante que possa usar margin: auto */
+                        margin-left: auto;
+                        margin-right: auto;
+                        margin-top: 30px; /* Espaçamento entre o card e o botão */
+                        width: fit-content; /* O bloco só ocupa a largura do conteúdo */
+                    "
+                >
+                    <span>Voltar para a Tela Inicial</span>
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                
+            </div>
+        </section>
+    </main>
+</body>
+</html>
