@@ -63,9 +63,11 @@ Espécie nativa sem ferrão, importante para a polinização e preservação amb
 
 ## Autor
 
+João Vitor Menk Alves
+
 Felipe Augusto Prestes Lopes
 
-Estudante de Desenvolvimento de Sistemas
+Estudantes de Desenvolvimento de Sistemas
 
 ## Projeto Educacional
 
