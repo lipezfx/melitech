@@ -46,20 +46,9 @@ Espécie nativa sem ferrão, importante para a polinização e preservação amb
 - Acompanhamento da vibração da colmeia
 - Visualização das informações em interface web
 
-## Futuras Melhorias
-
-- Dashboard mais completo
-- Histórico de dados em gráficos
-- Alertas automáticos
-- Integração com banco de dados
-- Acesso remoto
-
 ## Demonstração
 
-- Adicionar imagens do projeto
-- Fotos da montagem
-- Interface funcionando
-- Sensores em operação
+preciso por as fotos ***
 
 ## Autor
 
